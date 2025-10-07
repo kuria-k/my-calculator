@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { evaluate } from "mathjs";
+import { evaluate, sqrt, tan } from "mathjs";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function Calc() {
   const [exp, setExp] = useState("");
@@ -11,6 +12,60 @@ function Calc() {
   const calculation = () => {
     try {
       const result = evaluate(exp);
+      setExp(String(result));
+    } catch {
+      setExp("Error");
+    }
+  };
+
+  const squarert = () => {
+    try {
+      const result = Math.sqrt(exp);
+      setExp(String(result));
+    } catch {
+      setExp("Error");
+    }
+  };
+
+  const sin = () => {
+    try {
+      const result = Math.sin(exp);
+      setExp(String(result));
+    } catch {
+      setExp("Error");
+    }
+  };
+
+  const cos = () => {
+    try {
+      const result = Math.cos(exp);
+      setExp(String(result));
+    } catch {
+      setExp("Error");
+    }
+  };
+
+  const tan = () => {
+    try {
+      const result = Math.tan(exp);
+      setExp(String(result));
+    } catch {
+      setExp("Error");
+    }
+  };
+
+  const log = () => {
+    try {
+      const result = Math.log(exp);
+      setExp(String(result));
+    } catch {
+      setExp("Error");
+    }
+  };
+
+  const sqr = () => {
+    try {
+      const result = Math.pow(exp, 2);
       setExp(String(result));
     } catch {
       setExp("Error");
@@ -35,7 +90,7 @@ function Calc() {
           className="bg-gray-100 w-full max-w-xl h-[130px] mt-4 rounded-xl p-4 text-right text-purple-500 text-5xl font-mono shadow-md focus:outline-none focus:ring-2 focus:ring-purple-400"
         />
 
-        <div className="flex flex-col gap-5 items-center mt-6">
+        <div className="flex flex-col gap-3 items-center mt-6">
           <div className="flex flex-row gap-6 justify-center flex-wrap">
             <button
               type="button"
@@ -56,22 +111,25 @@ function Calc() {
             <button
               type="button"
               value={exp}
-              onClick={(e) => press("*")}
+              onClick={sin}
               className="h-[70px] w-[60px] bg-purple-700 hover:bg-purple-800 text-purple-100 font-bold rounded-2xl text-2xl shadow-sm transition duration-200 ease-in-out transform hover:scale-105"
             >
-              *
+              Sin
             </button>
             <button
               type="button"
               value={exp}
-              onClick={(e) => press("/")}
+              onClick={cos}
               className="h-[70px] w-[60px] bg-purple-700 hover:bg-purple-800 text-purple-100 font-bold rounded-2xl text-2xl shadow-sm transition duration-200 ease-in-out transform hover:scale-105"
             >
-              /{/* ÷ */}
+              Cos
             </button>
-            {/* <button className="h-[70px] w-[60px] bg-purple-700 hover:bg-purple-800 text-purple-100 font-bold rounded-2xl text-2xl shadow-sm transition duration-200 ease-in-out transform hover:scale-105">
-                C
-              </button> */}
+            <button
+              onClick={tan}
+              className="h-[70px] w-[60px] bg-purple-700 hover:bg-purple-800 text-purple-100 font-bold rounded-2xl text-2xl shadow-sm transition duration-200 ease-in-out transform hover:scale-105"
+            >
+              Tan
+            </button>
           </div>
 
           <div className="flex flex-row gap-6 justify-center flex-wrap">
@@ -105,11 +163,14 @@ function Calc() {
               onClick={(e) => press("*")}
               className="h-[70px] w-[60px] bg-purple-700 hover:bg-purple-800 text-purple-100 font-bold rounded-2xl text-2xl shadow-sm transition duration-200 ease-in-out transform hover:scale-105"
             >
-              *
+              <i class="fas fa-times"></i>
             </button>
-            {/* <button className="h-[70px] w-[60px] bg-purple-700 hover:bg-purple-800 text-purple-100 font-bold rounded-2xl text-2xl shadow-sm transition duration-200 ease-in-out transform hover:scale-105">
-                +
-              </button> */}
+            <button
+              onClick={log}
+              className="h-[70px] w-[60px] bg-purple-700 hover:bg-purple-800 text-purple-100 font-bold rounded-2xl text-2xl shadow-sm transition duration-200 ease-in-out transform hover:scale-105"
+            >
+              Log
+            </button>
           </div>
 
           <div className="flex flex-row gap-6 justify-center flex-wrap">
@@ -144,6 +205,12 @@ function Calc() {
               className="h-[70px] w-[60px] bg-purple-700 hover:bg-purple-800 text-purple-100 font-bold rounded-2xl text-2xl shadow-sm transition duration-200 ease-in-out transform hover:scale-105"
             >
               -
+            </button>
+            <button
+              onClick={sqr}
+              className="h-[70px] w-[60px] bg-purple-700 hover:bg-purple-800 text-purple-100 font-bold rounded-2xl text-2xl shadow-sm transition duration-200 ease-in-out transform hover:scale-105"
+            >
+              <i className="fas fa-superscript"></i>
             </button>
           </div>
 
@@ -180,6 +247,14 @@ function Calc() {
             >
               +
             </button>
+            <button
+              type="button"
+              value={exp}
+              onClick={() => press("^")}
+              className="h-[70px] w-[60px] bg-purple-700 hover:bg-purple-800 text-purple-100 font-bold rounded-2xl text-2xl shadow-sm transition duration-200 ease-in-out transform hover:scale-105"
+            >
+              ^
+            </button>
           </div>
 
           <div className="flex flex-row gap-6">
@@ -208,9 +283,51 @@ function Calc() {
               .
             </button>
             <button
+              type="button"
+              value={exp}
+              onClick={() => press("/")}
+              className="h-[70px] w-[60px] bg-purple-700 hover:bg-purple-800 text-white font-bold rounded-2xl text-xl shadow-sm transition duration-200 ease-in-out transform hover:scale-105 mt-2"
+            >
+              <i class="fa-solid fa-divide"></i>
+            </button>
+            <button
+              type="button"
+              value={exp}
+              onClick={squarert}
+              className="h-[70px] w-[60px] bg-purple-700 hover:bg-purple-800 text-purple-100 font-bold rounded-2xl text-xl shadow-sm transition duration-200 ease-in-out transform hover:scale-105"
+            >
+              <i className="fas fa-square-root-variable text-purple-100 text-2xl"></i>
+            </button>
+          </div>
+          <div className="flex flex-row gap-6 ml-[168px]">
+            {/* <button
+              type="button"
+              value={exp}
+              onClick={() => press("00")}
+              className="h-[70px] w-[60px] bg-purple-100 hover:bg-purple-200 text-purple-800 font-bold rounded-2xl text-xl shadow-sm transition duration-200 ease-in-out transform hover:scale-105 mt-2"
+            >
+              00
+            </button>
+            <button
+              type="button"
+              value={exp}
+              onClick={() => press("0")}
+              className="h-[70px] w-[60px] bg-purple-100 hover:bg-purple-200 text-purple-800 font-bold rounded-2xl text-xl shadow-sm transition duration-200 ease-in-out transform hover:scale-105 mt-2"
+            >
+              0
+            </button> */}
+            <button
+              type="button"
+              value={exp}
+              onClick={() => press("%")}
+              className="h-[70px] w-[60px] bg-purple-100 hover:bg-purple-200 text-purple-800 font-bold rounded-2xl text-xl shadow-sm transition duration-200 ease-in-out transform hover:scale-105 mt-2"
+            >
+              %
+            </button>
+            <button
               value={exp}
               onClick={calculation}
-              className="h-[70px] w-[60px] bg-purple-700 hover:bg-purple-800 text-purple-100 font-bold rounded-2xl text-2xl shadow-sm transition duration-200 ease-in-out transform hover:scale-105"
+              className="h-[70px] w-[146px] bg-purple-700 hover:bg-purple-800 text-purple-100 font-bold rounded-2xl text-2xl shadow-sm transition duration-200 ease-in-out transform hover:scale-105"
             >
               =
             </button>
